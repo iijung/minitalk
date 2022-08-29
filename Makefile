@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 06:04:57 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/30 04:14:12 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/30 08:29:59 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,8 @@ all bonus clean fclean re:
 	@$(MAKE) TOPDIR=`pwd` $(MAKECMDGOALS) -C lib
 	@$(MAKE) TOPDIR=`pwd` $(MAKECMDGOALS) -C src
 
-$(SERVER):
-	@$(MAKE) TOPDIR=`pwd` $(MAKECMDGOALS) -C lib
-	@$(MAKE) TOPDIR=`pwd` $(MAKECMDGOALS) -C src/$(SERVER)
+$(SERVER) $(CLIENT):
+	@$(MAKE) TOPDIR=`pwd` all -C lib
+	@$(MAKE) TOPDIR=`pwd` $(MAKECMDGOALS) -C src
 
-$(CLIENT):
-	@$(MAKE) TOPDIR=`pwd` $(MAKECMDGOALS) -C lib
-	@$(MAKE) TOPDIR=`pwd` $(MAKECMDGOALS) -C src/$(CLIENT)
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus $(NAME) $(SERVER) $(CLIENT)
