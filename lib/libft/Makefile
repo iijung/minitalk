@@ -6,12 +6,12 @@
 #    By: minjungk <minjungk@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/04 20:07:19 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/30 17:50:32 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/31 04:24:43 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ifndef $(TOPDIR)
-	TOPDIR = ../..
+ifndef TOPDIR
+	TOPDIR = $(abspath ../..)
 endif
 include $(TOPDIR)/Rules.mk
 
@@ -74,19 +74,19 @@ OBJS = $(SRCS:.c=.o)
 all bonus: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(ARFLAGS) $@ $^
-	$(MAKE) files=$(NAME) src_dir=`pwd` dst_dir=$(TOPDIR)/lib link_files
-	$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include link_files
+	@$(AR) $(ARFLAGS) $@ $^
+	@$(MAKE) files=$(NAME) src_dir=`pwd` dst_dir=$(TOPDIR)/lib link_files
+	@$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include link_files
 
 clean:
-	$(MAKE) files=$(NAME) src_dir=`pwd` dst_dir=$(TOPDIR)/lib unlink_files
-	$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include unlink_files
-	$(RM) $(OBJS)
+	@$(MAKE) files=$(NAME) src_dir=`pwd` dst_dir=$(TOPDIR)/lib unlink_files
+	@$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include unlink_files
+	@$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean
-	$(MAKE) all
+	@$(MAKE) all
 
 .PHONY: all clean fclean re bonus

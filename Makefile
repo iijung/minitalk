@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 06:04:57 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/30 21:37:17 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/31 01:02:33 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,4 +23,4 @@ $(SERVER) $(CLIENT):
 	@$(MAKE) TOPDIR=`pwd` -C lib
 	@$(MAKE) TOPDIR=`pwd` $@ -C src
 
-.PHONY: all clean fclean re bonus $(SERVER) $(CLIENT)
+.PHONY: all clean fclean re bonus

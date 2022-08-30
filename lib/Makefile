@@ -6,20 +6,18 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/30 02:49:12 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/30 17:49:42 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/31 04:24:15 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ifndef $(TOPDIR)
-	TOPDIR = ..
+ifndef TOPDIR
+	TOPDIR = $(abspath ..)
 endif
 include $(TOPDIR)/Rules.mk
 
-NAME =
+LIBS = libft ftprintf
 
-$(NAME): all
 all bonus clean fclean re:
-	$(MAKE) TOPDIR=$(TOPDIR) $(MAKECMDGOALS) -C libft
-	$(MAKE) TOPDIR=$(TOPDIR) $(MAKECMDGOALS) -C ftprintf
+	@$(foreach lib, $(LIBS), $(MAKE) TOPDIR=$(TOPDIR) $@ -C $(lib);)
 
 .PHONY: all clean fclean re bonus
