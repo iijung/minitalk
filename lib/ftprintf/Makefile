@@ -6,17 +6,18 @@
 #    By: minjungk <minjungk@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/17 03:49:45 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/30 03:40:00 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/30 17:50:38 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+ifndef $(TOPDIR)
+	TOPDIR = ../..
+endif
 include $(TOPDIR)/Rules.mk
 
 CFLAGS += -I$(TOPDIR)/include
+
 # **************************************************************************** #
-
-LIBFT = ../libft/libft.a
-
 NAME = libftprintf.a
 
 HEAD = \

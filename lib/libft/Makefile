@@ -6,12 +6,16 @@
 #    By: minjungk <minjungk@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/04 20:07:19 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/30 03:36:34 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/30 17:50:32 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+ifndef $(TOPDIR)
+	TOPDIR = ../..
+endif
 include $(TOPDIR)/Rules.mk
 
+# **************************************************************************** #
 NAME = libft.a
 
 HEAD = \

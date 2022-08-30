@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/30 02:29:01 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/30 08:30:49 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/30 17:53:57 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,8 @@ $(CLIENT): $(if $(filter bonus, $(MAKCMDGOALS)), $(CLIENT_SRCB), $(CLIENT_SRCS))
 	$(MAKE) files=$(CLIENT) src_dir=`pwd` dst_dir=$(TOPDIR) link_files
 	$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include link_files
 
+# **************************************************************************** #
+# all 
 # **************************************************************************** #
 $(NAME): all
 all bonus: $(SERVER) $(CLIENT)
