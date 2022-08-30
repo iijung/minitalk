@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile.server                                    :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/30 02:29:01 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/31 00:55:14 by minjungk         ###   ########.fr        #
+#    Created: 2022/08/31 00:44:24 by minjungk          #+#    #+#              #
+#    Updated: 2022/08/31 00:57:34 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,24 +15,30 @@ include $(TOPDIR)/Rules.mk
 CFLAGS += -I$(TOPDIR)/include
 LDFLAGS = -L$(TOPDIR)/lib -lftprintf -lft
 
-HEAD = minitalk.h
+NAME = server
 
-SERVER = server
-CLIENT = client
+SRCS = \
+	server.c \
 
-all bonus:
+SRCB = \
+	server.c \
+
+OBJS = $(if $(filter bonus, $(MAKECMDGOALS)), $(SRCB:.c=.o), $(SRCS:.c=.o))
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OUTPUT_OPTION) $^ $(LDFLAGS)
+	$(MAKE) files=$(NAME) src_dir=`pwd` dst_dir=$(TOPDIR) link_files
 	$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include link_files
-	$(MAKE) -f Makefile.$(SERVER) $@
-	$(MAKE) -f Makefile.$(CLIENT) $@
+
+all bonus: $(NAME)
 
 clean:
+	$(MAKE) files=$(NAME) src_dir=`pwd` dst_dir=$(TOPDIR) unlink_files
 	$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include unlink_files
-	$(MAKE) -f Makefile.$(SERVER) clean
-	$(MAKE) -f Makefile.$(CLIENT) clean
+	$(RM) $(OBJS)
 
 fclean: clean
-	$(MAKE) -f Makefile.$(SERVER) fclean
-	$(MAKE) -f Makefile.$(CLIENT) fclean
+	$(RM) $(NAME)
 
 re: fclean
 	$(MAKE) $(if $(filter bonus, $(MAKCMDGOALS)), bonus, all)
