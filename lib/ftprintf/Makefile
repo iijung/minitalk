@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/17 03:49:45 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/31 13:13:39 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/31 18:24:53 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = \
 	ft_printf.c \
 
 OBJS = $(SRCS:.c=.o)
+DEPS = $(SRCS:.c=.d)
 
 all bonus: $(NAME)
 
@@ -39,7 +40,7 @@ $(NAME): $(OBJS)
 clean:
 	$(Q)$(MAKE) files=$(NAME) src_dir=`pwd` dst_dir=$(TOPDIR)/lib unlink_files
 	$(Q)$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include unlink_files
-	$(Q)$(RM) $(OBJS)
+	$(Q)$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
 	$(Q)$(RM) $(NAME)
@@ -48,3 +49,5 @@ re: fclean
 	$(Q)$(MAKE) all
 
 .PHONY: all clean fclean re bonus
+
+-include $(DEPS)

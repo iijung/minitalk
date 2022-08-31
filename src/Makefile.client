@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/31 00:44:24 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/31 14:00:37 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/31 18:18:54 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,15 @@ HEAD = minitalk.h
 
 NAME = client
 
-SRCS = \
+src_m = \
 	client.c \
 
-SRCB = \
+src_b = \
 	client.c \
 
-OBJS = $(if $(filter bonus, $(MAKECMDGOALS)), $(SRCB:.c=.o), $(SRCS:.c=.o))
+SRCS = $(if $(filter bonus, $(MAKECMDGOALS)), $(src_b), $(src_m))
+OBJS = $(SRCS:.c=.o)
+DEPS = $(SRCS:.c=.d)
 
 all bonus: $(NAME)
 
@@ -40,7 +42,7 @@ $(NAME): $(OBJS)
 clean:
 	@$(MAKE) files=$(NAME) src_dir=`pwd` dst_dir=$(TOPDIR) unlink_files
 	@$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include unlink_files
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
 	@$(RM) $(NAME)
@@ -49,3 +51,5 @@ re: fclean
 	@$(MAKE) $(if $(filter bonus, $(MAKCMDGOALS)), bonus, all)
 
 .PHONY: all clean fclean re bonus
+
+-include $(DEPS)

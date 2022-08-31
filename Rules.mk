@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 07:07:52 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/31 14:17:32 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/31 18:15:06 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ AR := ar
 RM := rm -f
 
 ARFLAGS = rsc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -MMD -MP
 
 ifdef DEBUG
 	CFLAGS += -O0 -g -fsanitize=address,undefined
