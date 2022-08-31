@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/30 02:29:01 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/31 04:35:48 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/31 13:59:29 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,35 +15,14 @@ ifndef TOPDIR
 endif
 include $(TOPDIR)/Rules.mk
 
-CFLAGS += -I$(TOPDIR)/include
-LDFLAGS = -L$(TOPDIR)/lib -lftprintf -lft
-
-HEAD = minitalk.h
-
 SERVER = server
 CLIENT = client
 
-all bonus:
-	@$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include link_files
-	@$(MAKE) -f Makefile.$(SERVER) TOPDIR=$(TOPDIR) $@
-	@$(MAKE) -f Makefile.$(CLIENT) TOPDIR=$(TOPDIR) $@
+all bonus clean fclean re:
+	$(Q)$(MAKE) TOPDIR=$(TOPDIR) -f Makefile.$(SERVER) $@
+	$(Q)$(MAKE) TOPDIR=$(TOPDIR) -f Makefile.$(CLIENT) $@
 
-$(SERVER):
-	@$(MAKE) -f Makefile.$@ $(MAKECMDGOALS)
-
-$(CLIENT):
-	@$(MAKE) -f Makefile.$@ $(MAKECMDGOALS)
-
-clean:
-	@$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include unlink_files
-	@$(MAKE) -f Makefile.$(SERVER) TOPDIR=$(TOPDIR) clean
-	@$(MAKE) -f Makefile.$(CLIENT) TOPDIR=$(TOPDIR) clean
-
-fclean: clean
-	@$(MAKE) -f Makefile.$(SERVER) TOPDIR=$(TOPDIR) fclean
-	@$(MAKE) -f Makefile.$(CLIENT) TOPDIR=$(TOPDIR) fclean
-
-re: fclean
-	@$(MAKE) $(if $(filter bonus, $(MAKCMDGOALS)), bonus, all)
+$(SERVER) $(CLIENT):
+	$(Q)$(MAKE) TOPDIR=$(TOPDIR) -f Makefile.$@
 
 .PHONY: all clean fclean re bonus

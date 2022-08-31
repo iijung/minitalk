@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 07:07:52 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/31 04:29:07 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/31 14:17:32 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,20 @@ ifdef DEBUG
 	CFLAGS += -O0 -g -fsanitize=address,undefined
 endif
 
+Q = @
+ifdef VERBOSE
+	Q =
+endif
+
+%.o : %.c
+	$(Q)$(CC) $(CFLAGS) -c -o $@ $<
 
 # **************************************************************************** #
 # function rule 
 # **************************************************************************** #
 link_files:: unlink_files
 	@mkdir -p $(dst_dir);
-	$(foreach file,$(files), ln -sf $(src_dir)/$(file) $(dst_dir);)
+	$(Q)$(foreach file,$(files), ln -sf $(src_dir)/$(file) $(dst_dir);)
 
 unlink_files::
-	$(foreach file,$(files), $(RM) $(dst_dir)/$(file);)
+	$(Q)$(foreach file,$(files), $(RM) $(dst_dir)/$(file);)

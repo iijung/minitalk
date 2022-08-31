@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/30 02:49:12 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/31 04:24:15 by minjungk         ###   ########.fr        #
+#    Updated: 2022/08/31 14:11:11 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,6 @@ include $(TOPDIR)/Rules.mk
 LIBS = libft ftprintf
 
 all bonus clean fclean re:
-	@$(foreach lib, $(LIBS), $(MAKE) TOPDIR=$(TOPDIR) $@ -C $(lib);)
+	$(Q)$(foreach lib, $(LIBS), $(MAKE) TOPDIR=$(TOPDIR) -C $(lib) $@;)
 
 .PHONY: all clean fclean re bonus
