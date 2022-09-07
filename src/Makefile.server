@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/31 00:44:24 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/31 18:18:28 by minjungk         ###   ########.fr        #
+#    Updated: 2022/09/07 16:16:20 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,11 @@ HEAD = minitalk.h
 NAME = server
 
 src_m = \
+	minitalk.c \
 	server.c \
 
 src_b = \
+	minitalk.c \
 	server.c \
 
 SRCS = $(if $(filter bonus, $(MAKECMDGOALS)), $(src_b), $(src_m))

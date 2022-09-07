@@ -6,68 +6,50 @@
 /*   By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 04:23:34 by minjungk          #+#    #+#             */
-/*   Updated: 2022/09/07 11:25:51 by minjungk         ###   ########.fr       */
+/*   Updated: 2022/09/08 07:45:56 by minjungk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static t_socket	*head;
+static t_socket	g_server;
 
-int	send(int pid, char *message)
+static int	send(siginfo_t *info)
 {
-	static int	bit = 8;
-	static char	*buf;
-
-	if (message)
-		buf = message;
-	while (buf)
+	if (info == 0 || g_server.message == 0)
+		return (-1);
+	g_server.read_bit++;
+	g_server.read_buf = (g_server.message[0] >> (8 - g_server.read_bit)) & 1;
+	if (g_server.read_buf)
+		kill(g_server.pid, SIGUSR1);
+	else
+		kill(g_server.pid, SIGUSR2);
+	if (g_server.read_bit == 8)
 	{
-		if (bit == 8)
-		{
-
-		}
-
-		server.bit = 0x80;
-		while (server.bit)
-		{
-			if (*server.stream & server.bit)
-				kill(pid, SIGUSR1);
-			else
-				kill(pid, SIGUSR2);
-			pause();
-			if (server.err)
-				return (-1);
-			server.bit >>= 1;
-		}
-		++server.stream;
-		if (*server.stream == 0)
-			break ;
+		g_server.read_bit = 0;
+		if (*g_server.message == 0)
+			g_server.pid = 0;
+		++g_server.message;
 	}
 	return (0);
 }
 
-
 static void	handler(int sig, siginfo_t *info, void *ucontext)
 {
-	// send
-}
-
-static void	handler(int sig, siginfo_t *info, void *ucontext)
-{
-	// recv
 	(void)ucontext;
-	if (sig == SIGUSR2 || info == 0)
-	{
-		server.ret = -1;
-		ft_putstr_fd("error occur\n", 2);
+	if (info == 0)
 		return ;
-	}
 	if (sig == SIGUSR1)
 	{
-		if (send(info`
-		ft_putstr_fd("send success\n", 1);
+		if (g_server.pid)
+			send(info);
+		else
+			ft_printf("send success\n");
+		return ;
 	}
+	else
+		ft_putstr_fd("error occur\n", 2);
+	g_server.pid = 0;
 }
 
 int	main(int argc, char **argv)
@@ -79,6 +61,8 @@ int	main(int argc, char **argv)
 		ft_printf("usage: client <server pid> <message>\n");
 		return (0);
 	}
+	g_server.pid = ft_atoi(argv[1]);
+	g_server.message = argv[2];
 	sigemptyset(&act.sa_mask);
 	sigaddset(&act.sa_mask, SIGUSR1);
 	sigaddset(&act.sa_mask, SIGUSR2);
@@ -88,7 +72,9 @@ int	main(int argc, char **argv)
 	sigaction(SIGUSR1, &act, 0);
 	sigaction(SIGUSR2, &act, 0);
 	ft_printf("client[%d] start...\n", getpid());
-	send_message(ft_atoi(argv[1], argv[2]));
+	kill(0, SIGUSR1);
+	while (g_server.pid)
+		pause();
 	ft_printf("client[%d] stop...\n", getpid());
-	return (server.ret);
+	return (0);
 }
