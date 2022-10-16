@@ -6,31 +6,27 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 07:07:52 by minjungk          #+#    #+#              #
-#    Updated: 2022/08/31 18:15:06 by minjungk         ###   ########.fr        #
+#    Updated: 2022/10/16 09:50:15 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .DEFAULT_ON_ERROR:
 .DEFAULT_GOAL := all
 
-CC := cc
-AR := ar
-RM := rm -f
+CC := $Qcc
 
 ARFLAGS = rsc
 CFLAGS = -Wall -Wextra -Werror -MMD -MP
 
 ifdef DEBUG
 	CFLAGS += -O0 -g -fsanitize=address,undefined
+	LDFLAGS += -fsanitize=address,undefined
 endif
 
 Q = @
 ifdef VERBOSE
 	Q =
 endif
-
-%.o : %.c
-	$(Q)$(CC) $(CFLAGS) -c -o $@ $<
 
 # **************************************************************************** #
 # function rule 

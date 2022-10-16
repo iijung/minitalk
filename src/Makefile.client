@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/31 00:44:24 by minjungk          #+#    #+#              #
-#    Updated: 2022/09/07 16:16:27 by minjungk         ###   ########.fr        #
+#    Updated: 2022/10/16 09:55:57 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ endif
 include $(TOPDIR)/Rules.mk
 
 CFLAGS += -I$(TOPDIR)/include
-LDFLAGS = -L$(TOPDIR)/lib -lftprintf -lft
+LDFLAGS = -L$(TOPDIR)/lib
+LDLIBS = -lftprintf -lft
 
 HEAD = minitalk.h
 
@@ -33,11 +34,12 @@ src_b = \
 SRCS = $(if $(filter bonus, $(MAKECMDGOALS)), $(src_b), $(src_m))
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
+-include $(DEPS)
 
 all bonus: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OUTPUT_OPTION) $^ $(LDFLAGS)
+	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
 	@$(MAKE) files=$(NAME) src_dir=`pwd` dst_dir=$(TOPDIR) link_files
 	@$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include link_files
 
@@ -53,5 +55,3 @@ re: fclean
 	@$(MAKE) $(if $(filter bonus, $(MAKCMDGOALS)), bonus, all)
 
 .PHONY: all clean fclean re bonus
-
--include $(DEPS)
