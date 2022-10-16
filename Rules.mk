@@ -6,14 +6,14 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 07:07:52 by minjungk          #+#    #+#              #
-#    Updated: 2022/10/16 09:50:15 by minjungk         ###   ########.fr        #
+#    Updated: 2022/10/16 10:01:45 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .DEFAULT_ON_ERROR:
 .DEFAULT_GOAL := all
 
-CC := $Qcc
+CC = $Qcc
 
 ARFLAGS = rsc
 CFLAGS = -Wall -Wextra -Werror -MMD -MP
