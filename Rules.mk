@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 07:07:52 by minjungk          #+#    #+#              #
-#    Updated: 2022/10/16 10:08:12 by minjungk         ###   ########.fr        #
+#    Updated: 2022/10/16 10:21:13 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ endif
 # **************************************************************************** #
 link_files::
 	@mkdir -p $(dst_dir);
-	$(Q)$(foreach file,$(files), ln -sf $(src_dir)/$(file) $(dst_dir);)
+	$Q$(foreach file,$(files), ln -sf $(src_dir)/$(file) $(dst_dir);)
 
 unlink_files::
-	$(Q)$(foreach file,$(files), $(RM) $(dst_dir)/$(file);)
+	$Q$(foreach file,$(files), $(RM) $(dst_dir)/$(file);)
