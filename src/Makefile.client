@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/31 00:44:24 by minjungk          #+#    #+#              #
-#    Updated: 2022/10/16 09:55:57 by minjungk         ###   ########.fr        #
+#    Updated: 2022/10/23 00:42:41 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,17 +23,16 @@ HEAD = minitalk.h
 
 NAME = client
 
-src_m = \
-	minitalk.c \
-	client.c \
+obj_m = \
+	minitalk.o \
+	client.o \
 
-src_b = \
-	minitalk.c \
-	client.c \
+obj_b = \
+	minitalk.o \
+	client.o \
 
-SRCS = $(if $(filter bonus, $(MAKECMDGOALS)), $(src_b), $(src_m))
-OBJS = $(SRCS:.c=.o)
-DEPS = $(SRCS:.c=.d)
+OBJS = $(if $(filter bonus, $(MAKECMDGOALS)), $(obj_b), $(obj_m))
+DEPS = $(OBJS:.o=.d)
 -include $(DEPS)
 
 all bonus: $(NAME)
@@ -46,12 +45,12 @@ $(NAME): $(OBJS)
 clean:
 	@$(MAKE) files=$(NAME) src_dir=`pwd` dst_dir=$(TOPDIR) unlink_files
 	@$(MAKE) files=$(HEAD) src_dir=`pwd` dst_dir=$(TOPDIR)/include unlink_files
-	@$(RM) $(OBJS) $(DEPS)
+	$Q$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
-	@$(RM) $(NAME)
+	$Q$(RM) $(NAME)
 
 re: fclean
-	@$(MAKE) $(if $(filter bonus, $(MAKCMDGOALS)), bonus, all)
+	$Q$(MAKE) $(if $(filter bonus, $(MAKCMDGOALS)), bonus, all)
 
 .PHONY: all clean fclean re bonus

@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/17 03:49:45 by minjungk          #+#    #+#              #
-#    Updated: 2022/10/16 09:52:51 by minjungk         ###   ########.fr        #
+#    Updated: 2022/10/23 00:35:06 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,12 @@ NAME = libftprintf.a
 HEAD = \
 	ft_printf.h \
 
-SRCS = \
-	ft_make_token.c \
-	ft_parse_token.c \
-	ft_printf.c \
+OBJS = \
+	ft_make_token.o \
+	ft_parse_token.o \
+	ft_printf.o \
 
-OBJS = $(SRCS:.c=.o)
-DEPS = $(SRCS:.c=.d)
+DEPS = $(OBJS:.o=.d)
 -include $(DEPS)
 
 all bonus: $(NAME)
