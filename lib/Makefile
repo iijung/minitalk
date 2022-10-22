@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/30 02:49:12 by minjungk          #+#    #+#              #
-#    Updated: 2022/10/22 05:15:23 by minjungk         ###   ########.fr        #
+#    Updated: 2022/10/23 00:29:26 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,11 @@ ifndef TOPDIR
 endif
 include $(TOPDIR)/Rules.mk
 
-LIBS = libft ftprintf
+LIBS = libft/libft.a ftprintf/ftprintf.a
 
 all bonus clean fclean re:
-	@$(foreach lib, $(LIBS), $(MAKE) TOPDIR=$(TOPDIR) -C $(lib) $@;)
+	@for dir in $(dir $(LIBS)); do \
+		$(MAKE) TOPDIR=$(TOPDIR) -C $$dir $@; \
+	done
 
-.PHONY: all clean fclean re bonus $(LIBS)
+.PHONY: all clean fclean re bonus
