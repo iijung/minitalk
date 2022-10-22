@@ -6,7 +6,7 @@
 /*   By: minjungk <minjungk@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 11:03:12 by minjungk          #+#    #+#             */
-/*   Updated: 2022/08/15 20:37:00 by minjungk         ###   ########.fr       */
+/*   Updated: 2022/10/23 01:40:47 by minjungk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ int		ft_make_tokens(t_list **head, const char *format);
 int		ft_parse_token(t_token *t, va_list ap);
 
 int		ft_printf(const char *format, ...);
+int		ft_printf_fd(int fd, const char *format, ...);
 #endif
