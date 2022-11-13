@@ -6,7 +6,7 @@
 /*   By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 04:23:34 by minjungk          #+#    #+#             */
-/*   Updated: 2022/11/14 00:09:43 by minjungk         ###   ########.fr       */
+/*   Updated: 2022/11/14 01:10:33 by minjungk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static void	send_bit(int pid, int sig)
 	retry = 0;
 	while (g_mini.sig[0] == 0)
 	{
-		if (usleep(200) == 0)
+		if (usleep(50) == 0)
 			++retry;
-		if (retry == 50 && g_mini.sig[0] == 0)
+		if (retry == 100 && g_mini.sig[0] == 0)
 		{
-			ft_putstr_fd("Timeout\n", 2);
+			ft_putstr_fd(RED "Timeout\n" NC, 2);
 			exit(EXIT_FAILURE);
 		}
 	}
