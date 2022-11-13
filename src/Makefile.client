@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/31 00:44:24 by minjungk          #+#    #+#              #
-#    Updated: 2022/10/23 00:42:41 by minjungk         ###   ########.fr        #
+#    Updated: 2022/11/14 00:15:53 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,16 +23,17 @@ HEAD = minitalk.h
 
 NAME = client
 
-obj_m = \
-	minitalk.o \
-	client.o \
+src_m = \
+	minitalk.c \
+	client.c \
 
-obj_b = \
-	minitalk.o \
-	client.o \
+src_b = \
+	minitalk.c \
+	client.c \
 
-OBJS = $(if $(filter bonus, $(MAKECMDGOALS)), $(obj_b), $(obj_m))
-DEPS = $(OBJS:.o=.d)
+SRCS = $(if $(filter bonus, $(MAKECMDGOALS)), $(src_b), $(src_m))
+OBJS = $(OBJS:.c=.d)
+DEPS = $(OBJS:.c=.d)
 -include $(DEPS)
 
 all bonus: $(NAME)
