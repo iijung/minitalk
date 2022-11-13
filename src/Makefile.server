@@ -6,7 +6,7 @@
 #    By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/31 00:44:24 by minjungk          #+#    #+#              #
-#    Updated: 2022/11/14 00:15:50 by minjungk         ###   ########.fr        #
+#    Updated: 2022/11/14 01:01:00 by minjungk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,8 @@ src_b = \
 	server.c \
 
 SRCS = $(if $(filter bonus, $(MAKECMDGOALS)), $(src_b), $(src_m))
-OBJS = $(OBJS:.c=.d)
-DEPS = $(OBJS:.c=.d)
+OBJS = $(SRCS:.c=.o)
+DEPS = $(SRCS:.c=.d)
 -include $(DEPS)
 
 all bonus: $(NAME)
