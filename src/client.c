@@ -6,7 +6,7 @@
 /*   By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 04:23:34 by minjungk          #+#    #+#             */
-/*   Updated: 2022/11/14 01:10:33 by minjungk         ###   ########.fr       */
+/*   Updated: 2022/11/19 07:58:56 by minjungk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	send_char(int pid, int c)
 		}
 		bit >>= 1;
 	}
-//	ft_putchar_fd(c, 1);
 }
 
 int	main(int argc, char **argv)
