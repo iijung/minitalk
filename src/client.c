@@ -6,7 +6,7 @@
 /*   By: minjungk <minjungk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 04:23:34 by minjungk          #+#    #+#             */
-/*   Updated: 2022/11/19 07:58:56 by minjungk         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:20:39 by minjungk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	send_bit(int pid, int sig)
 
 	if (kill(pid, sig) < 0)
 	{
-		ft_putstr_fd("No such process\n", 2);
+		ft_putstr_fd(RED "No such process\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	retry = 0;
